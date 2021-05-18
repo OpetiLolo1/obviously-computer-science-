@@ -5,7 +5,7 @@ class QuizStarter:
   def __init__(self, parent):
     background_color="deep sky blue" 
     #frame set up
-    self.quiz_frame = Frame(parent, bg = background_color, padx=125, pady=125)
+    self.quiz_frame = Frame(parent, bg = background_color, padx=10, pady=10)
     self.quiz_frame.grid()
 
     #Label widget for heading
@@ -21,12 +21,13 @@ class QuizStarter:
     self.exit_button.grid(row=3)
 
     #Picture 
-    self.picture_image = Image.open("Python background.png")
-    self.picture_image = self.picture_image.resize((200, 200), Image.ANTIALIAS)
+    self.picture_image = Image.open("Math equipment.png")
+    self.picture_image = self.picture_image.resize((500, 200), Image.ANTIALIAS)
     self.picture_image = ImageTk.PhotoImage(self.picture_image)
-
+   
     self.image_label= Label(self.quiz_frame, image=self.picture_image)
     self.image_label.grid(row=1)
+    
     
 
 
