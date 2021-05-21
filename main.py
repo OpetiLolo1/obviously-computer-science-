@@ -20,7 +20,7 @@ class QuizStarter:
     self.start_button.grid(row=2) 
    
    #Exit button
-    self.exit_button = Button (self.quiz_frame, text = "EXIT", bg="red")
+    self.exit_button = Button (self.quiz_frame, text = "EXIT", bg="red", command=self.quiz_frame.destroy)
     self.exit_button.grid(row=4)
 
     #Picture resize
@@ -33,17 +33,17 @@ class QuizStarter:
   
   def start(self):
     self.quiz_frame.destroy()  
-    Name(root)
+    NameEnter(root)
 
 
-class Name:
+class NameEnter:
   def __init__(self, parent):
     background_color="deep sky blue"
 
-    self.quiz_frame = Frame(parent, bg = background_color, padx=10, pady=10)
+    self.quiz_frame = Frame(parent, bg = background_color, padx=100, pady=100)
     self.quiz_frame.grid()
 
-    self.heading_label = Label (self.quiz_frame, text = "MATHS", font=("Helvetica", "30", "bold"), bg=background_color)
+    self.heading_label = Label (self.quiz_frame, text = "Enter your name below", font=("Helvetica", "20"), bg=background_color)
     self.heading_label.grid(row=0)
   
     #Name Enter
