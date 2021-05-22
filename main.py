@@ -3,6 +3,21 @@ from PIL import ImageTk, Image
 
 names_list = []
 
+global questions_answers
+
+questions_answers = {
+    1: ["What is 3x7?",
+        '14',
+        '27',
+        '30',
+        '21',
+        '12,'
+      ,4]
+
+
+
+}
+
 class QuizStarter:
   def __init__(self, parent):
     background_color="deep sky blue"
@@ -12,7 +27,7 @@ class QuizStarter:
     self.quiz_frame.grid()
 
     #Label widget for heading
-    self.heading_label = Label (self.quiz_frame, text = "MATHS", font=("Helvetica", "30", "bold"), bg=background_color)
+    self.heading_label = Label (self.quiz_frame, text = "MATHS", font=("Helvetica", "30"), bg=background_color)
     self.heading_label.grid(row=0)
   
     #Start button
@@ -60,7 +75,14 @@ class NameEnter:
     print(names_list)
     self.quiz_frame.destroy()
 
-  
+
+
+
+
+
+
+
+
 
 #************Starting point program************#
 if __name__ == "__main__":
