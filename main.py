@@ -2,8 +2,8 @@ from tkinter import*
 from PIL import ImageTk, Image
 
 names_list = []
-
 global questions_answers
+asked = []
 
 questions_answers = {
     1: ["What is 3x7?",
@@ -11,12 +11,53 @@ questions_answers = {
         '27',
         '30',
         '21',
-        '12,'
-      ,4]
-
-
-
+        '12'
+      ,4],
+    2: ["What is 10x7?",
+        '10',
+        '60',
+        '35',
+        '90',
+        '70'
+      ,5],
+    3: ["What is the equation of a straight line?",
+        'y=mx+c',
+        'y=a(x+b)²+c',
+        'b²-4ac',
+        'y=(x+a)(x+b)(x+c)',
+        'Apples'
+      ,1],
+    4: ["Is a parabola a Circle ?",
+        'Yes',
+        'No',
+        'Maybe?'
+      ,2],
+    5: ["Is a vertex V-shaped",
+        'Maybe?',
+        'Yes',
+        'No'
+      ,2],
+    6: ["If a dice is rolled what is the probability of getting a even number",
+        '4/6',
+        '6/6',
+        '1/12',
+        '3/6',
+        '4/4'
+      ,4],
+    7: ["What is the shape of a parabola?",
+        'U-shaped',
+        'V-shaped',
+        'O-shaped'
+      ,1]
 }
+
+def randomiser():
+  global qnum
+  qnum = random.randint(1,7)
+  if qnum not in asked:
+    asked.append(qnum)
+  elif qnum in asked:
+    randomiser()
 
 class QuizStarter:
   def __init__(self, parent):
@@ -84,7 +125,8 @@ class NameEnter:
 
 
 
-#************Starting point program************#
+#************Starting point program************#\
+randomiser()
 if __name__ == "__main__":
   root = Tk()
   root.title("MATHS")
