@@ -1,9 +1,11 @@
 from tkinter import*
+import random
 from PIL import ImageTk, Image
 
-names_list = []
 global questions_answers
+names_list = []
 asked = []
+score=0
 
 questions_answers = {
     1: ["What is 3x7?",
@@ -59,6 +61,7 @@ def randomiser():
   elif qnum in asked:
     randomiser()
 
+
 class QuizStarter:
   def __init__(self, parent):
     background_color="deep sky blue"
@@ -107,26 +110,56 @@ class NameEnter:
     self.entry_box.grid(row=3, pady=10)
  
    #Exit button
-    self.exit_button = Button (self.quiz_frame, text = "CONTINUE", bg="lime", command=self.name_collection)
-    self.exit_button.grid(row=4)
+    self.continue_button = Button (self.quiz_frame, text = "CONTINUE", bg="lime", command=self.name_collection)
+    self.continue_button.grid(row=4)
 
   def name_collection(self):
     name = self.entry_box.get()
     names_list.append(name)
-    print(names_list)
     self.quiz_frame.destroy()
+    Quiz(root)
+    
 
+class Quiz:
+  def __init__(self, parent):
+    #color selections
+    background_color="Oldlace"
+    self.quiz_frame=Frame(parent, bg = background_color, padx=100, pady=100)
+    self.quiz_frame.grid()
 
+    randomiser()
 
+    #questions
+    self.question_label=Label(self.quiz_frame, text=questions_answers[qnum][0], font=("Tw Cen MT","16"),bg=background_color)
+    self.question_label.grid(row=0, padx=10, pady=10)
 
+    #holds value of ratio buttons
+    self.var1=IntVar()
 
+#radio button 1
+    self.rb1= Radiobutton(self.quiz_frame, text=questions_answers[qnum][1], font=("Helvetica","12"), bg=background_color,value=1,padx=10,pady=10, variable=self.var1, indicator = 1, background = "light blue")
+    self.rb1.grid(row=1)
 
+    self.rb1= Radiobutton(self.quiz_frame, text=questions_answers[qnum][2], font=("Helvetica","12"), bg=background_color,value=1,padx=10,pady=10, variable=self.var1, indicator = 1, background = "light blue")
+    self.rb1.grid(row=2)
 
+    self.rb1= Radiobutton(self.quiz_frame, text=questions_answers[qnum][3], font=("Helvetica","12"), bg=background_color,value=1,padx=10,pady=10, variable=self.var1, indicator = 1, background = "light blue")
+    self.rb1.grid(row=3)
 
+    self.rb1= Radiobutton(self.quiz_frame, text=questions_answers[qnum][4], font=("Helvetica","12"), bg=background_color,value=1,padx=10,pady=10, variable=self.var1, indicator = 1, background = "light blue")
+    self.rb1.grid(row=4)
 
+    self.rb1= Radiobutton(self.quiz_frame, text=questions_answers[qnum][5], font=("Helvetica","12"), bg=background_color,value=1,padx=10,pady=10, variable=self.var1, indicator = 1, background = "light blue")
+    self.rb1.grid(row=5)
 
-#************Starting point program************#\
-randomiser()
+    self.rb1= Radiobutton(self.quiz_frame, text=questions_answers[qnum][6], font=("Helvetica","12"), bg=background_color,value=1,padx=10,pady=10, variable=self.var1, indicator = 1, background = "light blue")
+    self.rb1.grid(row=6)
+
+    self.rb1= Radiobutton(self.quiz_frame, text=questions_answers[qnum][7], font=("Helvetica","12"), bg=background_color,value=1,padx=10,pady=10, variable=self.var1, indicator = 1, background = "light blue")
+    self.rb1.grid(row=7)
+
+#************Starting point program************#
+
 if __name__ == "__main__":
   root = Tk()
   root.title("MATHS")
