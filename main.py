@@ -9,19 +9,26 @@ score=0
 
 questions_answers = {
     1: ["What is 3x7?",
-        '14','27','30','21','12', 4],
+        '14','27','30','21','12' 
+        ,4],
     2: ["What is 10x7?",
-        '10','60','35','90','70', 5],
+        '10','60','35','90','70' 
+        ,5],
     3: ["What is the formula of a straight line?",
-        'y=mx+c', 'y=a(x+b)²+c', 'b²-4ac', 'y=(x+a)(x+b)(x+c)', 'Apples', 1],
+        'y=mx+c', 'y=a(x+b)²+c', 'b²-4ac', 'y=(x+a)(x+b)(x+c)', 'A=πr2' 
+        ,1],
     4: ["Is a parabola a Circle?", 
-        'Yes', 'No', 'Maybe?', 2],
+        'Yes', 'No', 'Maybe?' 
+        ,2],
     5: ["Is a vertex V-shaped?",
-        'Maybe?', 'Yes', 'No', 2],
+        'Maybe?', 'Yes', 'No' 
+        ,2],
     6: ["What is the probability of getting a even number on a dice?",
-        '4/6', '6/6', '1/12', '3/6', '4/4', 4],
+        '4/6', '6/6', '1/12', '3/6', '4/4' 
+        ,4],
     7: ["What is the shape of a parabola?",
-        'U-shaped', 'V-shaped', 'O-shaped', 1]
+        'U-shaped', 'V-shaped', 'O-shaped' 
+        ,1]
 }
 
 def randomiser():
@@ -105,7 +112,7 @@ class Quiz:
     randomiser()
 
     #questions
-    self.question_label = Label(self.quiz_frame, text=questions_answers[qnum][0], font=("Tw Cen MT","16"),bg=background_color)
+    self.question_label = Label(self.quiz_frame, text=questions_answers[qnum][0], font=("Tw Cen MT","14"),bg=background_color)
     self.question_label.grid(row=0, padx=10, pady=10)
 
     #holds value of ratio buttons
@@ -138,6 +145,18 @@ class Quiz:
 #radio button 7
     self.rb7 = Radiobutton(self.quiz_frame, text=questions_answers[qnum][7], font=("Helvetica","12"), bg=background_color, value=7, padx=10, pady=10, variable=self.var1, indicator = 1, background = "light blue")
     self.rb7.grid(row=7, pady=5)
+
+  def questions_setup(self):
+    randomiser()
+    self.var1.set(0)
+    self.question_label.config(text=questions_answers[qnum][0])
+    self.rb1.config(text=questions_answers[qnum][1])
+    self.rb2.config(text=questions_answers[qnum][2])
+    self.rb3.config(text=questions_answers[qnum][3])
+    self.rb4.config(text=questions_answers[qnum][4])
+    self.rb5.config(text=questions_answers[qnum][5])
+    self.rb6.config(text=questions_answers[qnum][6])
+    self.rb7.config(text=questions_answers[qnum][7]) 
 
 #************Starting point program************#
 
