@@ -95,13 +95,12 @@ class Quiz:
   def __init__(self, parent):
     #color selections
     background_color="deep sky blue"
-    self.quiz_frame = Frame(parent, bg = background_color, padx=125, pady=125)
+    self.quiz_frame = Frame(parent, bg = background_color, padx=50, pady=50)
     self.quiz_frame.grid()
 
     #continue Button
     self.confirm_button = Button(self.quiz_frame, text="Confirm", bg="lime")
-    self.confirm_button.grid(row=8) 
-
+    self.confirm_button.grid(row=8, pady=10) 
 
     randomiser()
 
@@ -114,33 +113,31 @@ class Quiz:
 
 #radio button 1
     self.rb1 = Radiobutton(self.quiz_frame, text=questions_answers[qnum][1], font=("Helvetica","12"), bg=background_color, value=1, padx=10, pady=10, variable = self.var1, indicator = 1, background = "light blue")
-    self.rb1.grid(row=1)
+    self.rb1.grid(row=1, pady=5)
 
 #radio button 2
     self.rb2 = Radiobutton(self.quiz_frame, text=questions_answers[qnum][2], font=("Helvetica","12"), bg=background_color, value=2, padx=10, pady=10, variable = self.var1, indicator = 1, background = "light blue")
-    self.rb2.grid(row=2)
+    self.rb2.grid(row=2, pady=5)
 
 #radio button 3
     self.rb3 = Radiobutton(self.quiz_frame, text=questions_answers[qnum][3], font=("Helvetica","12"), bg=background_color, value=3, padx=10, pady=10, variable = self.var1, indicator = 1, background = "light blue")
-    self.rb3.grid(row=3)
+    self.rb3.grid(row=3, pady=5)
 
 #radio button 4
     self.rb4 = Radiobutton(self.quiz_frame, text=questions_answers[qnum][4], font=("Helvetica","12"), bg=background_color, value=4, padx=10, pady=10, variable = self.var1, indicator = 1, background = "light blue")
-    self.rb4.grid(row=4)
+    self.rb4.grid(row=4, pady=5)
 
 #radio button 5
     self.rb5 = Radiobutton(self.quiz_frame, text=questions_answers[qnum][5], font=("Helvetica","12"), bg=background_color, value=5, padx=10, pady=10, variable = self.var1, indicator = 1, background = "light blue")
-    self.rb5.grid(row=5)
+    self.rb5.grid(row=5, pady=5)
 
 #radio button 6
     self.rb6 = Radiobutton(self.quiz_frame, text=questions_answers[qnum][6], font=("Helvetica","12"), bg=background_color, value=6, padx=10, pady=10, variable = self.var1, indicator = 1, background = "light blue")
-    self.rb6.grid(row=6)
+    self.rb6.grid(row=6, pady=5)
 
 #radio button 7
     self.rb7 = Radiobutton(self.quiz_frame, text=questions_answers[qnum][7], font=("Helvetica","12"), bg=background_color, value=7, padx=10, pady=10, variable=self.var1, indicator = 1, background = "light blue")
-    self.rb7.grid(row=7)
-
-
+    self.rb7.grid(row=7, pady=5)
 
 #************Starting point program************#
 
