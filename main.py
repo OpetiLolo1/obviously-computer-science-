@@ -106,8 +106,12 @@ class Quiz:
     self.quiz_frame.grid()
 
     #continue Button
-    self.confirm_button = Button(self.quiz_frame, text="Confirm", bg="lime")
-    self.confirm_button.grid(row=8, pady=10) 
+    self.confirm_button = Button(self.quiz_frame, text="Confirm", bg="lime", command=self.test_progress)
+    self.confirm_button.grid(row=8, pady=5) 
+
+    #score label to show score
+    self.score_label = Label(self.quiz_frame, text="SCORE", font=("Tw Cen MT", "16"), bg=background_color)
+    self.score_label.grid(row=9) 
 
     randomiser()
 
@@ -157,6 +161,17 @@ class Quiz:
     self.rb5.config(text=questions_answers[qnum][5])
     self.rb6.config(text=questions_answers[qnum][6])
     self.rb7.config(text=questions_answers[qnum][7]) 
+
+  def test_progress(self):
+      global score
+      scr_label = self.score_label
+      choice = self.var1.get()
+      if len(asked)>9:
+        if choice == questions_answers[qnum][6]:
+          score +=1
+          scr_label.configure(text=score)
+          self.confirm_button.config(text="CONFIRM")
+      
 
 #************Starting point program************#
 
