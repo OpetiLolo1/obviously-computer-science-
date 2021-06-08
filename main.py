@@ -8,27 +8,14 @@ asked = []
 score=0
 
 questions_answers = {
-    1: ["What is 3x7?",
-        '14','27','30','21','12' 
-        ,4],
-    2: ["What is 10x7?",
-        '10','60','35','90','70' 
-        ,5],
-    3: ["What is the formula of a straight line?",
-        'y=mx+c', 'y=a(x+b)²+c', 'b²-4ac', 'y=(x+a)(x+b)(x+c)', 'A=πr2' 
-        ,1],
-    4: ["Is a parabola a Circle?", 
-        'Yes', 'No', 'Maybe?' 
-        ,2],
-    5: ["Is a vertex V-shaped?",
-        'Maybe?', 'Yes', 'No' 
-        ,2],
-    6: ["What is the probability of getting a even number on a dice?",
-        '4/6', '6/6', '1/12', '3/6', '4/4' 
-        ,4],
-    7: ["What is the shape of a parabola?",
-        'U-shaped', 'V-shaped', 'O-shaped' 
-        ,1]
+ 1: ["What is 3x7?", '14','27','30','21', '21',4],
+ 2: ["What is 10x7?", '10','35','90','70', '70',5],
+ 3: ["What is the formula of a straight line?", 'y=mx+c', 'y=a(x+b)²+c', 'b²-4ac', 'A=πr2', 'y=mx+c',1],
+ 4: ["Is a parabola a Circle?", 'Yes', 'No', 'Maybe?', 'Not sure', 'Yes',2],
+ 5: ["Is a vertex V-shaped?", 'Maybe?', 'Yes', 'No', 'Not sure',  'Yes',2],
+ 6: ["What is the probability of getting a even number on a dice?", '4/6', '6/6', '1/12', '3/6', '3/6',4],
+ 7: ["What is the shape of a parabola?", 'U-shaped', 'V-shaped', 'O-shaped', 'W-shaped' 'U-shaped',1]
+
 }
 
 def randomiser():
@@ -77,6 +64,7 @@ class NameEnter:
   def __init__(self, parent):
     background_color="deep sky blue"
 
+    #Quiz Frame
     self.quiz_frame = Frame(parent, bg = background_color, padx=100, pady=100)
     self.quiz_frame.grid()
 
@@ -138,18 +126,8 @@ class Quiz:
     self.rb4 = Radiobutton(self.quiz_frame, text=questions_answers[qnum][4], font=("Helvetica","12"), bg=background_color, value=4, padx=10, pady=10, variable = self.var1, indicator = 1, background = "light blue")
     self.rb4.grid(row=4, pady=5)
 
-#radio button 5
-    self.rb5 = Radiobutton(self.quiz_frame, text=questions_answers[qnum][5], font=("Helvetica","12"), bg=background_color, value=5, padx=10, pady=10, variable = self.var1, indicator = 1, background = "light blue")
-    self.rb5.grid(row=5, pady=5)
 
-#radio button 6
-    self.rb6 = Radiobutton(self.quiz_frame, text=questions_answers[qnum][6], font=("Helvetica","12"), bg=background_color, value=6, padx=10, pady=10, variable = self.var1, indicator = 1, background = "light blue")
-    self.rb6.grid(row=6, pady=5)
-
-#radio button 7
-    self.rb7 = Radiobutton(self.quiz_frame, text=questions_answers[qnum][7], font=("Helvetica","12"), bg=background_color, value=7, padx=10, pady=10, variable=self.var1, indicator = 1, background = "light blue")
-    self.rb7.grid(row=7, pady=5)
-
+  #Set questions setup
   def questions_setup(self):
     randomiser()
     self.var1.set(0)
@@ -158,19 +136,37 @@ class Quiz:
     self.rb2.config(text=questions_answers[qnum][2])
     self.rb3.config(text=questions_answers[qnum][3])
     self.rb4.config(text=questions_answers[qnum][4])
-    self.rb5.config(text=questions_answers[qnum][5])
-    self.rb6.config(text=questions_answers[qnum][6])
-    self.rb7.config(text=questions_answers[qnum][7]) 
+ 
 
+  #confirm button command, could be enchanced  
   def test_progress(self):
       global score
       scr_label = self.score_label
       choice = self.var1.get()
-      if len(asked)>9:
-        if choice == questions_answers[qnum][6]:
-          score +=1
+      if len(asked)>6:
+        if choice == questions_answers[qnum][4]:
+          score +=5
           scr_label.configure(text=score)
           self.confirm_button.config(text="CONFIRM")
+        else:
+            score+=0
+            scr_label.configure(text="The actual answer was: " + questions_answers[qnum][4] + "try again") 
+            self.quiz_instance.config(text="Confirm")
+      else:
+         if choice == 0:
+             self.quiz_instance.config(text="Why didn't you pick something" + "too hard?")
+         else:
+           if choice == questions_answers[qnum][4]:
+              score +=5
+              scr_label.configure(text=score)
+              self.quiz_instance.config(text="Confirm")
+              self.questions_setup()
+           else:
+               score+0
+               scr_label.configure(text="The actual answer was " + questions_answers[qnum][4] + " try again")
+               self.quiz_instance.config(text="Confirm")
+               self.questions_setup()
+
       
 
 #************Starting point program************#
