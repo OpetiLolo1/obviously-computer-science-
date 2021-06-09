@@ -14,7 +14,7 @@ questions_answers = {
  4: ["Is a parabola a Circle?", 'Yes', 'No', 'Maybe?', 'Not sure', 'Yes',2],
  5: ["Is a vertex V-shaped?", 'Maybe?', 'Yes', 'No', 'Not sure',  'Yes',2],
  6: ["What is the probability of getting a even number on a dice?", '4/6', '6/6', '1/12', '3/6', '3/6',4],
- 7: ["What is the shape of a parabola?", 'U-shaped', 'V-shaped', 'O-shaped', 'W-shaped' 'U-shaped',1]
+ 7: ["What is the shape of a parabola?", 'U-shaped', 'V-shaped', 'O-shaped', 'W-shaped', 'U-shaped',1]
 
 }
 
@@ -37,22 +37,22 @@ class QuizStarter:
 
     #Label widget for heading
     self.heading_label = Label (self.quiz_frame, text = "MATHS", font=("Helvetica", "30"), bg=background_color)
-    self.heading_label.grid(row=0)
+    self.heading_label.grid(row=0, padx=5, pady=5)
   
     #Start button
     self.start_button = Button (self.quiz_frame, text = "START", bg="lime", command=self.start)
-    self.start_button.grid(row=2) 
+    self.start_button.grid(row=2, padx=5, pady=5) 
    
    #Exit button
     self.exit_button = Button (self.quiz_frame, text = "EXIT", bg="red", command=self.quiz_frame.destroy)
-    self.exit_button.grid(row=4)
+    self.exit_button.grid(row=4, padx=5, pady=5)
 
     #Picture resize
     self.picture_image = Image.open("Math equipment.png")
     self.picture_image = self.picture_image.resize((500, 200), Image.ANTIALIAS)
     self.picture_image = ImageTk.PhotoImage(self.picture_image)
     self.image_label= Label(self.quiz_frame, image=self.picture_image)
-    self.image_label.grid(row=1)
+    self.image_label.grid(row=1, pady=5, padx=5)
     
   
   def start(self):
@@ -69,15 +69,15 @@ class NameEnter:
     self.quiz_frame.grid()
 
     self.heading_label = Label (self.quiz_frame, text = "Enter your name below", font=("Helvetica", "20"), bg=background_color)
-    self.heading_label.grid(row=0)
+    self.heading_label.grid(row=0, padx=5, pady=5)
   
     #Name Enter
     self.entry_box=Entry(self.quiz_frame)
-    self.entry_box.grid(row=1, pady=10)
+    self.entry_box.grid(row=1, pady=5, padx=5)
  
    #Exit button
     self.continue_button = Button (self.quiz_frame, text = "CONTINUE", bg="lime", command=self.name_collection)
-    self.continue_button.grid(row=4)
+    self.continue_button.grid(row=4, pady=5, padx=5)
 
   def name_collection(self):
     name = self.entry_box.get()
@@ -94,8 +94,8 @@ class Quiz:
     self.quiz_frame.grid()
 
     #continue Button
-    self.confirm_button = Button(self.quiz_frame, text="Confirm", bg="lime", command=self.test_progress)
-    self.confirm_button.grid(row=8, pady=5) 
+    self.quiz_instance = Button(self.quiz_frame, text="CONFIRM", bg="lime", command=self.test_progress)
+    self.quiz_instance.grid(row=8, pady=5) 
 
     #score label to show score
     self.score_label = Label(self.quiz_frame, text="SCORE", font=("Tw Cen MT", "16"), bg=background_color)
@@ -111,19 +111,19 @@ class Quiz:
     self.var1=IntVar()
 
 #radio button 1
-    self.rb1 = Radiobutton(self.quiz_frame, text=questions_answers[qnum][1], font=("Helvetica","12"), bg=background_color, value=1, padx=10, pady=10, variable = self.var1, indicator = 1, background = "light blue")
+    self.rb1 = Radiobutton(self.quiz_frame, text=questions_answers[qnum][1], font=("Helvetica","12"), bg=background_color, value=1, padx=10, pady=10, variable = self.var1, indicator = 1, background = "light grey")
     self.rb1.grid(row=1, pady=5)
 
 #radio button 2
-    self.rb2 = Radiobutton(self.quiz_frame, text=questions_answers[qnum][2], font=("Helvetica","12"), bg=background_color, value=2, padx=10, pady=10, variable = self.var1, indicator = 1, background = "light blue")
+    self.rb2 = Radiobutton(self.quiz_frame, text=questions_answers[qnum][2], font=("Helvetica","12"), bg=background_color, value=2, padx=10, pady=10, variable = self.var1, indicator = 1, background = "light grey")
     self.rb2.grid(row=2, pady=5)
 
 #radio button 3
-    self.rb3 = Radiobutton(self.quiz_frame, text=questions_answers[qnum][3], font=("Helvetica","12"), bg=background_color, value=3, padx=10, pady=10, variable = self.var1, indicator = 1, background = "light blue")
+    self.rb3 = Radiobutton(self.quiz_frame, text=questions_answers[qnum][3], font=("Helvetica","12"), bg=background_color, value=3, padx=10, pady=10, variable = self.var1, indicator = 1, background = "light grey")
     self.rb3.grid(row=3, pady=5)
 
 #radio button 4
-    self.rb4 = Radiobutton(self.quiz_frame, text=questions_answers[qnum][4], font=("Helvetica","12"), bg=background_color, value=4, padx=10, pady=10, variable = self.var1, indicator = 1, background = "light blue")
+    self.rb4 = Radiobutton(self.quiz_frame, text=questions_answers[qnum][4], font=("Helvetica","12"), bg=background_color, value=4, padx=10, pady=10, variable = self.var1, indicator = 1, background = "light grey")
     self.rb4.grid(row=4, pady=5)
 
 
@@ -144,28 +144,44 @@ class Quiz:
       scr_label = self.score_label
       choice = self.var1.get()
       if len(asked)>6:
-        if choice == questions_answers[qnum][4]:
+        if choice == questions_answers[qnum][4]:  
           score +=5
           scr_label.configure(text=score)
           self.confirm_button.config(text="CONFIRM")
         else:
             score+=0
-            scr_label.configure(text="The actual answer was: " + questions_answers[qnum][4] + "try again") 
-            self.quiz_instance.config(text="Confirm")
+            scr_label.configure(text="Unfortunately the answer was " + questions_answers[qnum][4]) 
+            self.quiz_instance.config(text="CONFIRM")
       else:
          if choice == 0:
-             self.quiz_instance.config(text="Why didn't you pick something" + "too hard?")
+             scr_label.configure(text="Why didn't you pick something too hard?")
+             choice=self.var1.get()
          else:
            if choice == questions_answers[qnum][4]:
               score +=5
               scr_label.configure(text=score)
-              self.quiz_instance.config(text="Confirm")
+              self.quiz_instance.config(text="CONFIRM")
               self.questions_setup()
            else:
-               score+0
-               scr_label.configure(text="The actual answer was " + questions_answers[qnum][4] + " try again")
-               self.quiz_instance.config(text="Confirm")
+               score+=0
+               scr_label.configure(text="Unfortunately the answer was " + questions_answers[qnum][4])
+               self.quiz_instance.config(text="CONFIRM")
                self.questions_setup()
+
+class Endscreen:
+  def __init__ (self):
+    background="deep sky blue"
+    self.end_box = Toplevel(root)# top level widgets work as windows  that are directly managed by the window manager 
+    self.end_box.title("End Box")
+
+    self.end_frame = Frame (self.end_box, width=10000, height=10000, bg=background)
+    self.end_frame.grid(row=0)
+
+    self.end_heading = Label (self.end_frame, text="Congrats", font=("Helvetica", 22), bg=background, pady=15)
+    self.end_heading.grid(row=0)
+
+    
+      
 
       
 
