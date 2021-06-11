@@ -9,7 +9,7 @@ score=0
 
 questions_answers = {
  1: ["What is 3x7?", '14','27','30','21', '21',4],
- 2: ["What is 10x7?", '10','35','90','70', '70',5],
+ 2: ["What is 10x7?", '10','35','90','70', '70',4],
  3: ["What is the formula of a straight line?", 'y=mx+c', 'y=a(x+b)²+c', 'b²-4ac', 'A=πr2', 'y=mx+c',1],
  4: ["Is a parabola a Circle?", 'Yes', 'No', 'Maybe?', 'Not sure', 'Yes',2],
  5: ["Is a vertex V-shaped?", 'Maybe?', 'Yes', 'No', 'Not sure',  'Yes',2],
@@ -167,8 +167,14 @@ class Quiz:
            else:
                score+=0
                scr_label.configure(text="Unfortunately the answer was " + questions_answers[qnum][4])
-               self.quiz_instance.config(text="CONFIRM")
+               self.quiz_instance.config(text="CONFIRM", )
                self.questions_setup()
+
+  def endscreen(self):
+    root.withdraw()
+    open_endscrn=End()
+ 
+
 
 class End:
   def __init__ (self):
@@ -182,15 +188,15 @@ class End:
     self.end_heading = Label (self.end_frame, text="Congrats", font=("Helvetica", 22), bg=background, pady=15)
     self.end_heading.grid(row=0)
 
-    self.exit_button = Button (self.end_frame, text="Exit", width=10, bg="deep sky blue", font=("Helvetica", 12), command=self.close_end)
+    self.exit_button = Button (self.end_frame, text="Exit", width=10, bg="red", font=("Helvetica", 12), command=self.close_end)
     self.exit_button.grid(row=4, pady=20)
 
   def close_end(self):
     self.end_box.destroy()
-    root.destroy()
+    root.withdraw()
 
   def endscreen(self):
-    root.destroy()
+    root.withdraw()
     name=names[0]
     file=open("leaderBoard.txt", 'a')
     file.write(str(score))
@@ -216,6 +222,9 @@ class End:
 
     open_endscrn=End()
     open_endscrn.listLabel.config(text=return_string)
+
+    self.listLabel = Label (self.end_frame, text="1st Place Available", font=("Helvetica", 22), width=40, bg=background, padx=10, pady=10)
+    self.listLabel.grid(column=0, row=2)
 
     
 
