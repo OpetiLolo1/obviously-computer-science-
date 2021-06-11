@@ -145,20 +145,22 @@ class Quiz:
       choice = self.var1.get()
       if len(asked)>6:
         if choice == questions_answers[qnum][4]:  
-          score +=5
+          score +=1
           scr_label.configure(text=score)
           self.confirm_button.config(text="CONFIRM")
+          self.endscreen()
         else:
             score+=0
             scr_label.configure(text="Unfortunately the answer was " + questions_answers[qnum][4]) 
             self.quiz_instance.config(text="CONFIRM")
+            self.endscreen()
       else:
          if choice == 0:
              scr_label.configure(text="Why didn't you pick something too hard?")
              choice=self.var1.get()
          else:
            if choice == questions_answers[qnum][4]:
-              score +=5
+              score +=1
               scr_label.configure(text=score)
               self.quiz_instance.config(text="CONFIRM")
               self.questions_setup()
@@ -168,7 +170,7 @@ class Quiz:
                self.quiz_instance.config(text="CONFIRM")
                self.questions_setup()
 
-class Endscreen:
+class End:
   def __init__ (self):
     background="deep sky blue"
     self.end_box = Toplevel(root)# top level widgets work as windows  that are directly managed by the window manager 
@@ -179,6 +181,44 @@ class Endscreen:
 
     self.end_heading = Label (self.end_frame, text="Congrats", font=("Helvetica", 22), bg=background, pady=15)
     self.end_heading.grid(row=0)
+
+    self.exit_button = Button (self.end_frame, text="Exit", width=10, bg="deep sky blue", font=("Helvetica", 12), command=self.close_end)
+    self.exit_button.grid(row=4, pady=20)
+
+  def close_end(self):
+    self.end_box.destroy()
+    root.destroy()
+
+  def endscreen(self):
+    root.destroy()
+    name=names[0]
+    file=open("leaderBoard.txt", 'a')
+    file.write(str(score))
+    file.write(" - ")
+    file.write(name+"\n")
+    file.close()
+
+    inputFile = open("leaderBoard.txt", 'r')
+    lineList = inputFile.readlines()
+    lineList.sort()
+    top=[]
+    top5=(lineList[-5:])
+    for line in top5:
+      point=line.split(" - ")
+      top.append((int(point[0]), point[1]))
+    file.close()
+    top.sort()
+    top.reverse()
+    return_string= ""
+    for i in range(len(top)):
+        return_string +="{} - {}\n" .format(top[i][0], top[i][1])
+    print(return_string)
+
+    open_endscrn=End()
+    open_endscrn.listLabel.config(text=return_string)
+
+    
+
 
     
       
