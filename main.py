@@ -10,11 +10,11 @@ score=0
 questions_answers = {
  1: ["What is 3x7?", '14','27','30','21', '21',4],
  2: ["What is 10x7?", '10','35','90','70', '70',4],
- 3: ["What is the formula of a straight line?", 'y=mx+c', 'y=a(x+b)²+c', 'b²-4ac', 'A=πr2', 'y=mx+c',1],
- 4: ["Is a parabola a Circle?", 'Yes', 'No', 'Maybe?', 'Not sure', 'Yes',2],
- 5: ["Is a vertex V-shaped?", 'Maybe?', 'Yes', 'No', 'Not sure',  'Yes',2],
+ 3: ["What is the formula of a straight line?", 'A=πr2', 'y=a(x+b)²+c', 'b²-4ac', 'y=mx+c', 'y=mx+c',4],
+ 4: ["Is a parabola a Circle?", 'Not sure', 'No', 'Maybe?', 'Yes', 'Yes',4],
+ 5: ["Is a vertex V-shaped?", 'Maybe?', 'Not sure', 'No', 'Yes',  'Yes',4],
  6: ["What is the probability of getting a even number on a dice?", '4/6', '6/6', '1/12', '3/6', '3/6',4],
- 7: ["What is the shape of a parabola?", 'U-shaped', 'V-shaped', 'O-shaped', 'W-shaped', 'U-shaped',1]
+ 7: ["What is the shape of a parabola?", 'W-shaped', 'V-shaped', 'O-shaped', 'U-shaped', 'U-shaped',4]
 
 }
 
@@ -79,6 +79,10 @@ class NameEnter:
     self.continue_button = Button (self.quiz_frame, text = "CONTINUE", bg="lime", command=self.name_collection)
     self.continue_button.grid(row=4, pady=5, padx=5)
 
+
+
+
+
   def name_collection(self):
     name = self.entry_box.get()
     names_list.append(name)
@@ -98,7 +102,7 @@ class Quiz:
     self.quiz_instance.grid(row=8, pady=5) 
 
     #score label to show score
-    self.score_label = Label(self.quiz_frame, text="SCORE", font=("Tw Cen MT", "16"), bg=background_color)
+    self.score_label = Label(self.quiz_frame, font=("Tw Cen MT", "16"), bg=background_color)
     self.score_label.grid(row=9) 
 
     randomiser()
@@ -141,13 +145,13 @@ class Quiz:
   #confirm button command, could be enchanced  
   def test_progress(self):
       global score
-      scr_label = self.score_label
-      choice = self.var1.get()
+      scr_label=self.score_label
+      choice=self.var1.get()
       if len(asked)>6:
-        if choice == questions_answers[qnum][4]:  
+        if choice == questions_answers[qnum][6]:  
           score +=1
-          scr_label.configure(text=score)
-          self.confirm_button.config(text="CONFIRM")
+          scr_label.configure(text="Correct")
+          self.quiz_instance.config(text="CONFIRM")
           self.endscreen()
         else:
             score+=0
@@ -159,15 +163,15 @@ class Quiz:
              scr_label.configure(text="Why didn't you pick something too hard?")
              choice=self.var1.get()
          else:
-           if choice == questions_answers[qnum][4]:
+           if choice == questions_answers[qnum][6]:#If user picks right answer
               score +=1
-              scr_label.configure(text=score)
+              scr_label.configure(text="Correct")
               self.quiz_instance.config(text="CONFIRM")
               self.questions_setup()
            else:
                score+=0
                scr_label.configure(text="Unfortunately the answer was " + questions_answers[qnum][4])
-               self.quiz_instance.config(text="CONFIRM", )
+               self.quiz_instance.config(text="CONFIRM")
                self.questions_setup()
 
   def endscreen(self):
@@ -182,10 +186,10 @@ class End:
     self.end_box = Toplevel(root)# top level widgets work as windows  that are directly managed by the window manager 
     self.end_box.title("End Box")
 
-    self.end_frame = Frame (self.end_box, width=10000, height=10000, bg=background)
+    self.end_frame = Frame (self.end_box, width=250, height=300, bg=background)
     self.end_frame.grid(row=0)
 
-    self.end_heading = Label (self.end_frame, text="Congrats", font=("Helvetica", 22), bg=background, pady=15)
+    self.end_heading = Label (self.end_frame, text="Congrats on finishing the quiz now leave and never come back", font=("Helvetica", 18), bg=background, pady=50, padx=10)
     self.end_heading.grid(row=0)
 
     self.exit_button = Button (self.end_frame, text="Exit", width=10, bg="red", font=("Helvetica", 12), command=self.close_end)
@@ -195,44 +199,7 @@ class End:
     self.end_box.destroy()
     root.withdraw()
 
-  def endscreen(self):
-    root.withdraw()
-    name=names[0]
-    file=open("leaderBoard.txt", 'a')
-    file.write(str(score))
-    file.write(" - ")
-    file.write(name+"\n")
-    file.close()
-
-    inputFile = open("leaderBoard.txt", 'r')
-    lineList = inputFile.readlines()
-    lineList.sort()
-    top=[]
-    top5=(lineList[-5:])
-    for line in top5:
-      point=line.split(" - ")
-      top.append((int(point[0]), point[1]))
-    file.close()
-    top.sort()
-    top.reverse()
-    return_string= ""
-    for i in range(len(top)):
-        return_string +="{} - {}\n" .format(top[i][0], top[i][1])
-    print(return_string)
-
-    open_endscrn=End()
-    open_endscrn.listLabel.config(text=return_string)
-
-    self.listLabel = Label (self.end_frame, text="1st Place Available", font=("Helvetica", 22), width=40, bg=background, padx=10, pady=10)
-    self.listLabel.grid(column=0, row=2)
-
-    
-
-
-    
-      
-
-      
+       
 
 #************Starting point program************#
 
