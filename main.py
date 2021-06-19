@@ -12,12 +12,12 @@ questions_answers = {
  2: ["What is 10x7?", '10','35','90','70', '70',4],
  3: ["What is the formula of a straight line?", 'A=πr2', 'y=a(x+b)²+c', 'b²-4ac', 'y=mx+c', 'y=mx+c',4],
  4: ["Is a parabola a Circle?", 'Not sure', 'No', 'Maybe?', 'Yes', 'Yes',4],
- 5: ["Is a vertex V-shaped?", 'Maybe?', 'Not sure', 'No', 'Yes',  'Yes',4],
+ 5: ["Expand (x+3)(x+4)", 'x²+4x²+8', 'x²+6x+12', '2x+4x+3x+7', 'x²+7x+12',  'x²+7x+12',4],
  6: ["What is the probability of getting a even number on a dice?", '4/6', '6/6', '1/12', '3/6', '3/6',4],
- 7: ["What is the shape of a parabola?", 'W-shaped', 'V-shaped', 'O-shaped', 'U-shaped', 'U-shaped',4]
+ 7: ["Simplify 3x+4+5x²+7x", '5x²+10x+4' '2x²+3x', '5x²+21x+4', '3x²+4x+10', '5x²+10x+4',4]
 
 }
-
+#function for randomising the order of the questions so they are not predictable
 def randomiser():
   global qnum
   qnum = random.randint(1,7)
@@ -39,22 +39,22 @@ class QuizStarter:
     self.heading_label = Label (self.quiz_frame, text = "MATHS", font=("Helvetica", "30"), bg=background_color)
     self.heading_label.grid(row=0, padx=5, pady=5)
   
-    #Start button
+    #Start button to begin the code
     self.start_button = Button (self.quiz_frame, text = "START", bg="lime", command=self.start)
     self.start_button.grid(row=2, padx=5, pady=5) 
    
-   #Exit button
+   #Exit button to leave the quiz
     self.exit_button = Button (self.quiz_frame, text = "EXIT", bg="red", command=self.quiz_frame.destroy)
     self.exit_button.grid(row=4, padx=5, pady=5)
 
-    #Picture resize
-    self.picture_image = Image.open("Math equipment.png")
-    self.picture_image = self.picture_image.resize((500, 200), Image.ANTIALIAS)
+    
+    self.picture_image = Image.open("Math equipment.png")#choose image from files
+    self.picture_image = self.picture_image.resize((500, 200), Image.ANTIALIAS)#resize the image 
     self.picture_image = ImageTk.PhotoImage(self.picture_image)
     self.image_label= Label(self.quiz_frame, image=self.picture_image)
     self.image_label.grid(row=1, pady=5, padx=5)
     
-  
+  #function for continuong to the NameEnter window
   def start(self):
     self.quiz_frame.destroy()  
     NameEnter(root)
@@ -68,26 +68,28 @@ class NameEnter:
     self.quiz_frame = Frame(parent, bg = background_color, padx=100, pady=100)
     self.quiz_frame.grid()
 
+    #text to let the user know to enter there name
     self.heading_label = Label (self.quiz_frame, text = "Enter your name below", font=("Helvetica", "20"), bg=background_color)
     self.heading_label.grid(row=0, padx=5, pady=5)
   
-    #Name Enter
-    self.entry_box=Entry(self.quiz_frame)
+    #Entry box so users can inout there names
+    self.entry_box = Entry(self.quiz_frame)
     self.entry_box.grid(row=1, pady=5, padx=5)
  
-   #Exit button
+   #continue button to let the user start the quiz
     self.continue_button = Button (self.quiz_frame, text = "CONTINUE", bg="lime", command=self.name_collection)
     self.continue_button.grid(row=4, pady=5, padx=5)
 
-
-
-
-
   def name_collection(self):
-    name = self.entry_box.get()
-    names_list.append(name)
-    self.quiz_frame.destroy()
-    Quiz(root)
+    name=self.entry_box.get()
+    if name.strip () != "" and len (name) <= 15:
+       names_list.append(name)
+       self.quiz_frame.destroy()
+       Quiz(root)
+    elif len(name) >15:
+      self.heading_label.config(text="Enter something under 15 characters you stupid person", fg="red")
+    elif len(name) ==0:
+      self.heading_label.config(text="At least enter something you stupid person", fg="red") 
     
 
 class Quiz:
@@ -144,35 +146,34 @@ class Quiz:
 
   #confirm button command, could be enchanced  
   def test_progress(self):
-      global score
+      global score#score needs to be accesiable to all 
       scr_label=self.score_label
       choice=self.var1.get()
       if len(asked)>6:
-        if choice == questions_answers[qnum][6]:  
-          score +=1
-          scr_label.configure(text="Correct")
+        if choice == questions_answers[qnum][6]:#give the right answer to user instead of score 
+
+          scr_label.configure(text="Correct")#will show if the user picks correct answer
           self.quiz_instance.config(text="CONFIRM")
-          self.endscreen()
+          self.endscreen()#open the endscreen after the quiz
         else:
-            score+=0
-            scr_label.configure(text="Unfortunately the answer was " + questions_answers[qnum][4]) 
-            self.quiz_instance.config(text="CONFIRM")
-            self.endscreen()
+            scr_label.configure(text="Unfortunately the answer was " + questions_answers[qnum][4])#this will give the user the right answer
+            self.quiz_instance.config(text="CONFIRM")#button text
+            self.endscreen()#this will open the end screen when the user finished the quiz
       else:
-         if choice == 0:
-             scr_label.configure(text="Why didn't you pick something too hard?")
-             choice=self.var1.get()
+         if choice == 0:#if user doesn't pick a option 
+             scr_label.configure(text="Why didn't you pick something too hard?")# text will pop up that lets the user know that they haven't chosen anything
+             choice=self.var1.get()#still will get the user the even if correct
          else:
            if choice == questions_answers[qnum][6]:#If user picks right answer
-              score +=1
+
               scr_label.configure(text="Correct")
               self.quiz_instance.config(text="CONFIRM")
-              self.questions_setup()
+              self.questions_setup()#will move on to the next question
            else:
-               score+=0
+
                scr_label.configure(text="Unfortunately the answer was " + questions_answers[qnum][4])
                self.quiz_instance.config(text="CONFIRM")
-               self.questions_setup()
+               self.questions_setup()#will move on to the next question
 
   def endscreen(self):
     root.withdraw()
@@ -183,18 +184,22 @@ class Quiz:
 class End:
   def __init__ (self):
     background="deep sky blue"
-    self.end_box = Toplevel(root)# top level widgets work as windows  that are directly managed by the window manager 
+    self.end_box = Toplevel(root) #top level widgets work as windows that are directly managed by the window manager 
     self.end_box.title("End Box")
 
+    #frame for endscreen
     self.end_frame = Frame (self.end_box, width=250, height=300, bg=background)
     self.end_frame.grid(row=0)
-
+    
+    #heading for endscreen
     self.end_heading = Label (self.end_frame, text="Congrats on finishing the quiz now leave and never come back", font=("Helvetica", 18), bg=background, pady=50, padx=10)
     self.end_heading.grid(row=0)
-
+    
+    #exit button for endscreen
     self.exit_button = Button (self.end_frame, text="Exit", width=10, bg="red", font=("Helvetica", 12), command=self.close_end)
     self.exit_button.grid(row=4, pady=20)
 
+  #function for exit button to close the program
   def close_end(self):
     self.end_box.destroy()
     root.withdraw()
