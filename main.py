@@ -327,13 +327,13 @@ class Quiz:
                 self.endscreen()  # open the endscreen after the quiz
             else:
                 scr_label.configure(text='Unfortunately the answer was '
-                                     + questions_answers[qnum][4], fg='white')  # this will give the user the right answer
+                                     + questions_answers[qnum][4], fg='red')  # this will give the user the right answer
                 self.quiz_instance.config(text='CONFIRM', fg='white')  # button text
                 self.endscreen()  # this will open the end screen when the user finished the quiz
         else:
             if choice == 0:  # if user doesn't pick a option
                 scr_label.configure(text="Why didn't you pick something too hard?"
-                                    , fg='white')  # text will pop up that lets the user know that they haven't chosen anything
+                                    , fg='red')  # text will pop up that lets the user know that they haven't chosen anything
                 choice = self.var1.get()  # still will get the user the even if correct
             else:
                 if choice == questions_answers[qnum][6]:  # If user picks right answer
@@ -344,7 +344,7 @@ class Quiz:
                 else:
 
                     scr_label.configure(text='Unfortunately the answer was '
-                             + questions_answers[qnum][4], fg='white')
+                             + questions_answers[qnum][4], fg='red')
                     self.quiz_instance.config(text='CONFIRM', fg='white')
                     self.questions_setup()  # will move on to the next question
 
