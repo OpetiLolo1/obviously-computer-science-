@@ -3,18 +3,18 @@ import random
 from PIL import ImageTk, Image
 
 global questions_answers
-names_list = []
+names_list = [] #holds players name
 asked = []
 score = 0
 
 questions_answers = {
     1: [
-        'What is 3x7?',
-        '14',
-        '27',
-        '30',
-        '21',
-        '21',
+        'What is 3x7?',#item 1 is index 0, this is question
+        '14',#item 2 is index 1 this is option 1
+        '27',#item 3 is index 2 this is option 2
+        '30',#item 4 is index 3 this is option 3
+        '21',#item 5 is index 5 this is option 4
+        '21',#item 6 is index 6 this is the correct answer 
         4,
         ],
     2: [
@@ -77,8 +77,8 @@ questions_answers = {
 # function for randomising the order of the questions so they are not predictable
 
 def randomiser():
-    global qnum
-    qnum = random.randint(1, 7)
+    global qnum#the question number is the key in my dictionary question_answers, we have 7 keys (7 questions) 
+    qnum = random.randint(1, 7)#the order of the code is random every time
     if qnum not in asked:
         asked.append(qnum)
     elif qnum in asked:
@@ -87,8 +87,8 @@ def randomiser():
 
 class QuizStarter:
 
-    def __init__(self, parent):
-        background_color = 'deep sky blue'
+    def __init__(self, parent):#constructor the __init__(): is called every time to create a new object
+        background_color = 'deep sky blue'#background colour for frame
 
     # frame set up
 
@@ -98,7 +98,7 @@ class QuizStarter:
 
     # Label widget for heading
 
-        self.heading_label = Label(self.quiz_frame, text='MATHS',
+        self.heading_label = Label(self.quiz_frame, text='MATHS',#
                                    fg='white', font=('Helvetica', '30',
                                    'bold'), bg=background_color)
         self.heading_label.grid(row=0, padx=5, pady=5)
@@ -107,13 +107,13 @@ class QuizStarter:
 
         self.start_button = Button(
             self.quiz_frame,
-            text='START',
-            fg='white',
-            bg='lime',
-            font=('Helvetica', '10', 'bold'),
-            command=self.start,
+            text='START',#text that will appear on button
+            fg='white',#colour of the button
+            bg='lime',#colour background of the button
+            font=('Helvetica', '10', 'bold'), #font type, font size, bold
+            command=self.start,#command allows button to start button
             )
-        self.start_button.grid(row=2, padx=5, pady=5)
+        self.start_button.grid(row=2, padx=5, pady=5)#row is the position, padx and pady keep them from touching 
 
    # Exit button to leave the quiz
 
@@ -123,7 +123,7 @@ class QuizStarter:
             fg='white',
             bg='red',
             font=('Helvetica', '10', 'bold'),
-            command=self.quiz_frame.destroy,
+            command=self.quiz_frame.destroy,#command allows button to exit quiz
             )
         self.exit_button.grid(row=4, padx=5, pady=5)
 
@@ -215,14 +215,14 @@ class Quiz:
                                     bg='lime', 
                                     fg='white',
                                     font=('Helvetica', '10', 'bold'),
-                                    command=self.test_progress)
+                                    command=self.test_check)
         self.quiz_instance.grid(row=8, pady=5)  # show position of the continue button
 
     # score label to show score
 
         self.score_label = Label(self.quiz_frame, font=('Tw Cen MT',
                                  '16'), bg=background_color)
-        self.score_label.grid(row=9)  # position of score
+        self.score_label.grid(row=9) 
 
         randomiser()
 
@@ -305,17 +305,17 @@ class Quiz:
   # Set questions setup
 
     def questions_setup(self):
-        randomiser()
+        randomiser()#allows quiz questions to open in different order each time
         self.var1.set(0)
         self.question_label.config(text=questions_answers[qnum][0])
-        self.rb1.config(text=questions_answers[qnum][1])
-        self.rb2.config(text=questions_answers[qnum][2])
-        self.rb3.config(text=questions_answers[qnum][3])
-        self.rb4.config(text=questions_answers[qnum][4])
+        self.rb1.config(text=questions_answers[qnum][1])#option 1 will be on radio button 1
+        self.rb2.config(text=questions_answers[qnum][2])#option 2 will be on radio button 2
+        self.rb3.config(text=questions_answers[qnum][3])#option 3 will be on radio button 3
+        self.rb4.config(text=questions_answers[qnum][4])#option 4 will be on radio button 4
 
   # confirm button command, could be enchanced
 
-    def test_progress(self):
+    def test_check(self):
         global score  # score needs to be accesiable to all
         scr_label = self.score_label
         choice = self.var1.get()
@@ -406,5 +406,5 @@ class End:
 if __name__ == '__main__':
     root = Tk()
     root.title('MATHS')
-    quizStarter_object = QuizStarter(root)
-    root.mainloop()
+    quizStarter_object = QuizStarter(root)#instantation, making an instance of the class QuizStarter 
+    root.mainloop()#so the window doesn't disappear 
