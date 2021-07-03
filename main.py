@@ -109,7 +109,7 @@ class QuizStarter:
             self.quiz_frame,
             text='START',#text that will appear on button
             fg='white',#colour of the button
-            bg='lime',#colour background of the button
+            bg='green',#colour background of the button
             font=('Helvetica', '10', 'bold'), #font type, font size, bold
             command=self.start,#command allows button to start button
             )
@@ -135,7 +135,7 @@ class QuizStarter:
                                  image=self.picture_image)
         self.image_label.grid(row=1, pady=5, padx=5)
 
-  # function for continuong to the NameEnter window
+  # function for continuing to the NameEnter window
 
     def start(self):
         self.quiz_frame.destroy()
@@ -171,7 +171,7 @@ class NameEnter:
         self.continue_button = Button(
             self.quiz_frame,
             text='CONTINUE',
-            bg='lime',
+            bg='green',
             fg='white',
             font=('Helvetica', '10', 'bold'),
             command=self.name_collection,
@@ -188,7 +188,7 @@ class NameEnter:
 
                        # if user enters name over 15 characters
 
-            self.heading_label.config(text='Enter something under 15 characters you stupid person'
+            self.heading_label.config(text='Enter something under 16 characters you stupid person'
                     , fg='red')  # text will appear to let user know thatthey must enter less characters
         elif len(name) == 0:
 
@@ -212,7 +212,7 @@ class Quiz:
     # continue Button
 
         self.quiz_instance = Button(self.quiz_frame, text='CONFIRM',
-                                    bg='lime', 
+                                    bg='green', 
                                     fg='white',
                                     font=('Helvetica', '10', 'bold'),
                                     command=self.test_check)
@@ -390,6 +390,7 @@ class End:
             width=10,
             bg='red',
             font=('Helvetica', 12),
+            fg='white',
             command=self.close_end,
             )
         self.exit_button.grid(row=4, pady=20)
